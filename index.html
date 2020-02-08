@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<head>
+<title>smoke.js | A Small But Good JavaScript Smoke Effect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<style type="text/css">
+	html, body {
+		position: absolute;
+		margin: 0;
+		width: 100%;
+		overflow: hidden;
+		height: 100%;
+	}
+	html {
+	
+	background: url('lion_bg.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	background-color:black;
+
+	}
+	
+	.noselect {
+		-webkit-touch-callout: none; /* iOS Safari */
+    	-webkit-user-select: none; /* Safari */
+     	-khtml-user-select: none; /* Konqueror HTML */
+       	-moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		user-select: none; /* Non-prefixed version, currently
+					  supported by Chrome and Opera */
+	}
+
+	.left{
+		display:block;
+		position:absolute;
+		left: 45.2%;
+		top: 31.6%;
+		width:24px;
+		height:20px;
+		border-radius: 50%;
+		background: linear-gradient(190deg,transparent,transparent 30%, coral);
+		filter:blur(3px);
+		opacity: 0;
+		-webkit-transition: opacity 3s;
+	}
+	.left:hover{
+		opacity: .5;
+		-webkit-transition: opacity .5s;
+
+	}
+
+	.left:before{
+		content:'';
+		position:absolute;
+		top: 3px;
+		left:3px;
+		right:3px;
+		bottom:3px;
+		background: linear-gradient(220deg,transparent,transparent 30%, black);
+		border-radius: 50%;
+		z-index:1000;
+	}
+	.left:after{
+		content:'';
+		position:absolute;
+		top: 0px;
+		left:0px;
+		right:0px;
+		bottom:0px;
+		background: linear-gradient(190deg,transparent,transparent 40%, coral);
+		border-radius:50%;
+		z-index:1000;
+		z-index:1;
+		
+	}
+
+	.right{
+		display:block;
+		position:absolute;
+		right: 45.1%;
+		top: 32%;
+		width:23px;
+		height:20px;
+		border-radius: 50%;
+		background: linear-gradient(180deg,transparent,transparent 30%, coral);
+		filter:blur(3px);
+		opacity: 0;
+		-webkit-transition: opacity 3s;
+	}
+	.right:hover{
+		opacity: .5;
+		-webkit-transition: opacity .5s;
+
+	}
+
+	.right:before{
+		content:'';
+		position:absolute;
+		top: 3px;
+		left:3px;
+		right:3px;
+		bottom:3px;
+		background: linear-gradient(190deg,transparent,transparent 30%, black);
+		border-radius: 50%;
+		z-index:1000;
+	}
+	.right:after{
+		content:'';
+		position:absolute;
+		top: 0px;
+		left:0px;
+		right:0px;
+		bottom:0px;
+		background: linear-gradient(190deg,transparent,transparent 40%, coral);
+		border-radius:50%;
+		z-index:1000;
+		z-index:1;
+		
+	}
+
+
+</style>
+</head>
+<body>
+
+
+<div class="left"></div>
+<div class="right"></div>
+<canvas id="canvas"></canvas> 
+<script src="https://cdn.jsdelivr.net/npm/@bijection/smoke/smoke.js"></script>
+<script>
+	var canvas = document.getElementById('canvas')
+	var ctx = canvas.getContext('2d')
+	canvas.width = innerWidth
+	canvas.height = innerHeight
+
+	var party = smokemachine(ctx, [220,220,220])
+	party.start() // start animating
+	party.setPreDrawCallback(function(dt){
+		party.addSmoke(innerWidth/2, innerHeight/2, .5)
+		canvas.width = innerWidth
+		canvas.height = innerHeight
+	})
+
+
+
+
+	// party.addsmoke(innerWidth/2, innerHeight, 100)
+	// onclick=e => {
+	// 	console.log(e)
+	// 	party.step()
+	// }
+
+	onmousemove = function (e) {
+		var x = e.clientX
+		var y = e.clientY
+		var n = .5
+		var t = Math.floor(Math.random() * 200) + 3800
+		party.addsmoke(x, y, n, t)
+	}
+
+</script>
+</body>
+</html>
